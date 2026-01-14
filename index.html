@@ -1,0 +1,2310 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro Tenis & Pádel — Seba/Borja</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#121a27;
+      --panel2:#0f1622;
+      --text:#e7eefc;
+      --muted:#9fb0cc;
+      --line:#223048;
+      --ok:#2ecc71;
+      --bad:#ff5c5c;
+      --warn:#f5c542;
+      --accent:#7aa7ff;
+      --chip:#1c2a42;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+      --radius:16px;
+      --radius2:12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 20% 0%, #15223a 0%, var(--bg) 45%) fixed;
+      color:var(--text);
+      font-family:var(--sans);
+    }
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,.65);
+      border-bottom:1px solid rgba(34,48,72,.6);
+    }
+    .wrap{max-width:1200px;margin:0 auto;padding:14px 16px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .brand{
+      display:flex;align-items:center;gap:12px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .brand .logo{
+      width:40px;height:40px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(122,167,255,.95), rgba(46,204,113,.85));
+      box-shadow: var(--shadow);
+      display:grid;place-items:center;
+      color:#07101f; font-weight:900;
+    }
+    .brand small{display:block;font-weight:600;color:var(--muted); margin-top:2px;}
+    nav{display:flex;gap:10px;flex-wrap:wrap;}
+    .tab{
+      background: rgba(18,26,39,.55);
+      border:1px solid rgba(34,48,72,.8);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      transition: transform .06s ease, background .2s ease, border .2s ease;
+      font-weight:700;
+      font-size:13px;
+    }
+    .tab:hover{transform: translateY(-1px); border-color: rgba(122,167,255,.7)}
+    .tab.active{
+      background: rgba(122,167,255,.18);
+      border-color: rgba(122,167,255,.7);
+    }
+    main{max-width:1200px;margin:0 auto;padding:18px 16px 28px;}
+    .grid{
+      display:grid;
+      grid-template-columns: 420px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(18,26,39,.9), rgba(15,22,34,.9));
+      border:1px solid rgba(34,48,72,.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(34,48,72,.7);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      background: rgba(10,14,22,.25);
+    }
+    .card .hd h2{
+      margin:0;font-size:15px;letter-spacing:.2px;
+    }
+    .card .bd{padding:14px;}
+    .row{display:grid;grid-template-columns: 1fr 1fr; gap:10px;}
+    .row3{display:grid;grid-template-columns: 1fr 1fr 1fr; gap:10px;}
+    @media (max-width: 680px){
+      .row,.row3{grid-template-columns:1fr}
+    }
+    label{display:block;font-size:12px;color:var(--muted);margin:0 0 6px}
+    input, select, textarea{
+      width:100%;
+      background: rgba(10,14,22,.35);
+      border:1px solid rgba(34,48,72,.9);
+      color:var(--text);
+      padding:10px 10px;
+      border-radius: 12px;
+      outline:none;
+    }
+    textarea{min-height:86px; resize:vertical;}
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(122,167,255,.85);
+      box-shadow: 0 0 0 3px rgba(122,167,255,.12);
+    }
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;}
+    button{
+      border:1px solid rgba(34,48,72,.9);
+      background: rgba(122,167,255,.12);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:800;
+      transition:.15s ease;
+    }
+    button:hover{transform: translateY(-1px); border-color: rgba(122,167,255,.85)}
+    .ghost{background: rgba(10,14,22,.25)}
+    .danger{background: rgba(255,92,92,.14); border-color: rgba(255,92,92,.4)}
+    .ok{background: rgba(46,204,113,.13); border-color: rgba(46,204,113,.45)}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;
+      background: rgba(28,42,66,.8);
+      border:1px solid rgba(34,48,72,.7);
+      font-size:12px;font-weight:800;color:var(--text);
+    }
+    .list{display:flex;flex-direction:column;gap:10px;}
+    .item{
+      border:1px solid rgba(34,48,72,.8);
+      background: rgba(10,14,22,.25);
+      border-radius: var(--radius2);
+      padding:12px;
+    }
+    .item .top{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+    }
+    .item h3{margin:0 0 4px;font-size:14px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .chip{
+      background: rgba(28,42,66,.7);
+      border:1px solid rgba(34,48,72,.65);
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .mini{font-size:12px;color:var(--muted);line-height:1.3}
+    .hr{height:1px;background:rgba(34,48,72,.7);margin:10px 0}
+    .kpi{
+      display:grid; grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width: 980px){ .kpi{grid-template-columns: repeat(2, minmax(0,1fr));} }
+    .kpi .box{
+      background: rgba(10,14,22,.25);
+      border:1px solid rgba(34,48,72,.8);
+      border-radius: 14px;
+      padding:10px;
+    }
+    .kpi .box b{display:block;font-size:18px}
+    .kpi .box span{display:block;font-size:12px;color:var(--muted);font-weight:800}
+    .sliders{display:grid;gap:10px;margin-top:10px}
+    .slider{
+      border:1px solid rgba(34,48,72,.8);
+      background: rgba(10,14,22,.25);
+      border-radius: 14px;
+      padding:10px;
+    }
+    .slider .sTop{display:flex;justify-content:space-between;gap:10px;align-items:center}
+    .slider .sTop b{font-size:12px}
+    .slider input[type=range]{width:100%}
+    .rightTools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .hint{font-size:12px;color:var(--muted);line-height:1.35}
+    canvas{width:100%;height:300px;background: rgba(10,14,22,.25); border:1px solid rgba(34,48,72,.8); border-radius: 16px;}
+    .badgeWin{color:var(--ok);font-weight:900}
+    .badgeLose{color:var(--bad);font-weight:900}
+    .smallBtn{padding:8px 10px;font-size:12px;border-radius:10px}
+    .toast{
+      position:fixed; right:16px; bottom:16px;
+      padding:10px 12px; border-radius: 12px;
+      background: rgba(18,26,39,.95);
+      border:1px solid rgba(34,48,72,.9);
+      box-shadow: var(--shadow);
+      color: var(--text);
+      font-weight:800; font-size:13px;
+      opacity:0; transform: translateY(10px);
+      transition: .2s ease;
+      pointer-events:none;
+    }
+    .toast.show{opacity:1; transform: translateY(0px)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <div class="brand">
+      <div class="logo">TP</div>
+      <div>
+        Registro Tenis & Pádel
+        <small>Seba / Borja · offline · guarda en tu navegador</small>
+      </div>
+    </div>
+    <nav>
+      <button class="tab active" data-tab="matches">Partidos</button>
+      <button class="tab" data-tab="tournaments">Campeonatos</button>
+      <button class="tab" data-tab="tactics">Planes tácticos</button>
+      <button class="tab" data-tab="tech">Técnica por golpe</button>
+      <button class="tab" data-tab="stats">Estadísticas</button>
+      <button class="tab" data-tab="data">Datos</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- PARTIDOS -->
+  <section id="matches" class="tabPane">
+    <div class="grid">
+      <div class="card">
+        <div class="hd">
+          <h2 id="matchFormTitle">Nuevo partido</h2>
+          <span class="pill" id="storagePill">Guardado local</span>
+        </div>
+        <div class="bd">
+          <div class="row">
+            <div>
+              <label>Usuario</label>
+              <select id="m_user">
+                <option value="Seba">Seba</option>
+                <option value="Borja">Borja</option>
+              </select>
+            </div>
+            <div>
+              <label>Deporte</label>
+              <select id="m_sport">
+                <option value="Tenis">Tenis</option>
+                <option value="Padel">Pádel</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Tipo de partido</label>
+              <select id="m_type">
+                <option value="Amistoso">Amistoso</option>
+                <option value="Campeonato">Campeonato</option>
+              </select>
+            </div>
+            <div>
+              <label>Modalidad</label>
+              <select id="m_mode"></select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Categoría</label>
+              <select id="m_category"></select>
+            </div>
+            <div>
+              <label>Resultado</label>
+              <select id="m_result">
+                <option value="Ganado">Ganado</option>
+                <option value="Perdido">Perdido</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Fecha</label>
+              <input id="m_date" type="date"/>
+            </div>
+            <div>
+              <label>Plantilla score (opcional)</label>
+              <select id="m_scoreTemplate">
+                <option value="">(sin plantilla)</option>
+                <option value="TB7">Tenis Borja TB a 7 (ej: 7-5)</option>
+                <option value="TB10">Tenis Borja TB a 10 (ej: 10-8)</option>
+                <option value="SET6">Tenis set a 6 (ej: 6-4)</option>
+                <option value="PADEL1SET6">Pádel 1 set a 6 (ej: 6-3)</option>
+                <option value="PADEL1SET9">Pádel 1 set a 9 (ej: 9-7)</option>
+                <option value="PADEL2SET_STB11">Pádel 2 sets + STB11 (ej: 6-4 4-6 11-8)</option>
+                <option value="3SETS">3 sets (ej: 6-3 3-6 6-4)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Score (texto libre)</label>
+              <input id="m_score" placeholder="Ej: 6-4 7-6(5) | 10-8 | 6-4 4-6 11-9" />
+            </div>
+            <div>
+              <label>Formato de score (para estadísticas)</label>
+              <select id="m_scoreFormat">
+                <option value="Libre">Libre</option>
+                <option value="TB7">TB7</option>
+                <option value="TB10">TB10</option>
+                <option value="Set6">Set a 6</option>
+                <option value="Padel1Set6">Pádel 1 set a 6</option>
+                <option value="Padel1Set9">Pádel 1 set a 9</option>
+                <option value="Padel2Set+STB11">Pádel 2 sets + STB11</option>
+                <option value="3Sets">3 sets</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Rival 1 (nombre)</label>
+              <input id="m_opp1" placeholder="Nombre rival" />
+            </div>
+            <div>
+              <label>Rival 1 (categoría)</label>
+              <input id="m_opp1cat" placeholder="Ej: Segunda / Verde / 4ta" />
+            </div>
+          </div>
+
+          <div class="row" id="opp2Row" style="display:none;">
+            <div>
+              <label>Rival 2 (nombre)</label>
+              <input id="m_opp2" placeholder="Nombre rival 2" />
+            </div>
+            <div>
+              <label>Rival 2 (categoría)</label>
+              <input id="m_opp2cat" placeholder="Categoría rival 2" />
+            </div>
+          </div>
+
+          <div class="row" id="partnerRow" style="display:none;">
+            <div>
+              <label>Partner (nombre)</label>
+              <input id="m_partner" placeholder="Nombre partner" />
+            </div>
+            <div>
+              <label>Partner (categoría)</label>
+              <input id="m_partnercat" placeholder="Categoría partner" />
+            </div>
+          </div>
+
+          <div id="tournamentLinkBox" style="display:none;">
+            <div class="hr"></div>
+            <div class="row">
+              <div>
+                <label>Campeonato (seleccionar o crear)</label>
+                <select id="m_tournamentId"></select>
+              </div>
+              <div>
+                <label>Ronda</label>
+                <select id="m_round">
+                  <option value="Grupo">Grupo</option>
+                  <option value="1R">1R</option>
+                  <option value="R16">R16</option>
+                  <option value="QF">QF</option>
+                  <option value="SF">SF</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label>Nombre campeonato (si creas nuevo)</label>
+                <input id="m_newTournamentName" placeholder="Ej: Interclubes Rapel" />
+              </div>
+              <div>
+                <label>Fecha campeonato</label>
+                <input id="m_newTournamentDate" type="date"/>
+              </div>
+            </div>
+            <p class="hint">Tip: si eliges “(Crear nuevo…)”, se usará el nombre/fecha de arriba para crear el campeonato y este partido quedará asociado.</p>
+          </div>
+
+          <div class="hr"></div>
+
+          <div>
+            <label>Resumen 1–7 (sliders)</label>
+            <div class="hint">Se ajusta automáticamente según Usuario + Deporte. Borja Tenis: 8 ítems. Seba Tenis y Pádel: 9 ítems.</div>
+            <div id="m_sliders" class="sliders"></div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div>
+            <label>Comentario (opcional)</label>
+            <textarea id="m_comment" placeholder="Qué funcionó, qué no, sensación, plan para el próximo..."></textarea>
+          </div>
+
+          <div class="btns">
+            <button class="ok" id="saveMatchBtn">Guardar partido</button>
+            <button class="ghost" id="resetMatchBtn">Limpiar</button>
+            <button class="danger" id="deleteMatchBtn" style="display:none;">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd">
+          <h2>Partidos registrados</h2>
+          <div class="rightTools">
+            <input id="matchSearch" placeholder="Buscar (rival, score, comentario, torneo...)" />
+            <button class="smallBtn ghost" id="clearSearch">Limpiar</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="row3">
+            <div>
+              <label>Filtro usuario</label>
+              <select id="f_user">
+                <option value="">(todos)</option>
+                <option value="Seba">Seba</option>
+                <option value="Borja">Borja</option>
+              </select>
+            </div>
+            <div>
+              <label>Filtro deporte</label>
+              <select id="f_sport">
+                <option value="">(todos)</option>
+                <option value="Tenis">Tenis</option>
+                <option value="Padel">Pádel</option>
+              </select>
+            </div>
+            <div>
+              <label>Filtro tipo</label>
+              <select id="f_type">
+                <option value="">(todos)</option>
+                <option value="Amistoso">Amistoso</option>
+                <option value="Campeonato">Campeonato</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row3" style="margin-top:10px">
+            <div>
+              <label>Filtro modalidad</label>
+              <select id="f_mode"><option value="">(todas)</option></select>
+            </div>
+            <div>
+              <label>Filtro categoría</label>
+              <select id="f_category"><option value="">(todas)</option></select>
+            </div>
+            <div>
+              <label>Filtro resultado</label>
+              <select id="f_result">
+                <option value="">(todos)</option>
+                <option value="Ganado">Ganado</option>
+                <option value="Perdido">Perdido</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+          <div id="matchList" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPEONATOS -->
+  <section id="tournaments" class="tabPane" style="display:none;">
+    <div class="grid">
+      <div class="card">
+        <div class="hd">
+          <h2 id="tFormTitle">Nuevo campeonato</h2>
+          <span class="pill">🏆 / F / SF / QF / R16 / 1R</span>
+        </div>
+        <div class="bd">
+          <div class="row">
+            <div>
+              <label>Usuario</label>
+              <select id="t_user">
+                <option value="Seba">Seba</option>
+                <option value="Borja">Borja</option>
+              </select>
+            </div>
+            <div>
+              <label>Deporte</label>
+              <select id="t_sport">
+                <option value="Tenis">Tenis</option>
+                <option value="Padel">Pádel</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Modalidad</label>
+              <select id="t_mode"></select>
+            </div>
+            <div>
+              <label>Categoría</label>
+              <select id="t_category"></select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Nombre campeonato</label>
+              <input id="t_name" placeholder="Ej: Open Peumo" />
+            </div>
+            <div>
+              <label>Fecha campeonato</label>
+              <input id="t_date" type="date" />
+            </div>
+          </div>
+
+          <div class="btns">
+            <button class="ok" id="saveTournamentBtn">Guardar campeonato</button>
+            <button class="ghost" id="resetTournamentBtn">Limpiar</button>
+            <button class="danger" id="deleteTournamentBtn" style="display:none;">Eliminar</button>
+          </div>
+
+          <div class="hr"></div>
+          <p class="hint">
+            Los partidos se agregan en la pestaña <b>Partidos</b> con tipo “Campeonato” y seleccionando el campeonato + ronda.
+            La app calcula la instancia alcanzada en base a tus resultados guardados.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd">
+          <h2>Campeonatos</h2>
+          <div class="rightTools">
+            <input id="tSearch" placeholder="Buscar (nombre, usuario, deporte...)" />
+            <button class="smallBtn ghost" id="tClearSearch">Limpiar</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div id="tournamentList" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÁCTICA -->
+  <section id="tactics" class="tabPane" style="display:none;">
+    <div class="grid">
+      <div class="card">
+        <div class="hd"><h2 id="taFormTitle">Nuevo plan táctico</h2></div>
+        <div class="bd">
+          <div class="row">
+            <div>
+              <label>Usuario</label>
+              <select id="ta_user">
+                <option value="Seba">Seba</option>
+                <option value="Borja">Borja</option>
+              </select>
+            </div>
+            <div>
+              <label>Deporte</label>
+              <select id="ta_sport">
+                <option value="Tenis">Tenis</option>
+                <option value="Padel">Pádel</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Categoría (opcional)</label>
+              <input id="ta_category" placeholder="Ej: Segunda / Verde / 4ta" />
+            </div>
+            <div>
+              <label>Etiquetas (separadas por coma)</label>
+              <input id="ta_tags" placeholder="Ej: vs zurdo, cancha lenta, viento" />
+            </div>
+          </div>
+          <div>
+            <label>Plan táctico</label>
+            <textarea id="ta_text" placeholder="Ej: 1) Servir al cuerpo… 2) Buscar revés… 3) Subir tras bola corta…"></textarea>
+          </div>
+          <div class="row">
+            <div>
+              <label>Activo</label>
+              <select id="ta_active">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+              </select>
+            </div>
+            <div>
+              <label>&nbsp;</label>
+              <div class="btns" style="margin:0">
+                <button class="ok" id="saveTacticBtn">Guardar</button>
+                <button class="ghost" id="resetTacticBtn">Limpiar</button>
+                <button class="danger" id="deleteTacticBtn" style="display:none;">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd">
+          <h2>Planes tácticos</h2>
+          <div class="rightTools">
+            <input id="taSearch" placeholder="Buscar (texto, tags, usuario...)" />
+            <button class="smallBtn ghost" id="taClearSearch">Limpiar</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div id="tacticList" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÉCNICA -->
+  <section id="tech" class="tabPane" style="display:none;">
+    <div class="grid">
+      <div class="card">
+        <div class="hd"><h2 id="teFormTitle">Nuevo detalle técnico</h2></div>
+        <div class="bd">
+          <div class="row">
+            <div>
+              <label>Usuario</label>
+              <select id="te_user">
+                <option value="Seba">Seba</option>
+                <option value="Borja">Borja</option>
+              </select>
+            </div>
+            <div>
+              <label>Deporte</label>
+              <select id="te_sport">
+                <option value="Tenis">Tenis</option>
+                <option value="Padel">Pádel</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Golpe</label>
+              <select id="te_shot"></select>
+            </div>
+            <div>
+              <label>Link a video (opcional)</label>
+              <input id="te_link" placeholder="https://..." />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Clave técnica</label>
+              <textarea id="te_key" placeholder="Ej: Mantener codo alto, pronar al final, terminar adentro..."></textarea>
+            </div>
+            <div>
+              <label>Error típico</label>
+              <textarea id="te_error" placeholder="Ej: abrir demasiado, golpear tarde, quedarse atrás..."></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Cue corto (1 frase)</label>
+              <input id="te_cue" placeholder='Ej: "termina adelante"' />
+            </div>
+            <div>
+              <label>&nbsp;</label>
+              <div class="btns" style="margin:0">
+                <button class="ok" id="saveTechBtn">Guardar</button>
+                <button class="ghost" id="resetTechBtn">Limpiar</button>
+                <button class="danger" id="deleteTechBtn" style="display:none;">Eliminar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+          <p class="hint">Esto es como tu “manual personal”. Después podrás cruzarlo con tus estadísticas.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd">
+          <h2>Detalles técnicos</h2>
+          <div class="rightTools">
+            <input id="teSearch" placeholder="Buscar (golpe, cue, error...)" />
+            <button class="smallBtn ghost" id="teClearSearch">Limpiar</button>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="row3">
+            <div>
+              <label>Filtro deporte</label>
+              <select id="teFilterSport">
+                <option value="">(todos)</option>
+                <option value="Tenis">Tenis</option>
+                <option value="Padel">Pádel</option>
+              </select>
+            </div>
+            <div>
+              <label>Filtro usuario</label>
+              <select id="teFilterUser">
+                <option value="">(todos)</option>
+                <option value="Seba">Seba</option>
+                <option value="Borja">Borja</option>
+              </select>
+            </div>
+            <div>
+              <label>Filtro golpe</label>
+              <select id="teFilterShot"><option value="">(todos)</option></select>
+            </div>
+          </div>
+          <div class="hr"></div>
+          <div id="techList" class="list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTADÍSTICAS -->
+  <section id="stats" class="tabPane" style="display:none;">
+    <div class="card">
+      <div class="hd">
+        <h2>Estadísticas</h2>
+        <div class="rightTools">
+          <span class="pill" id="statInfoPill">Filtros + radar 1–7</span>
+        </div>
+      </div>
+      <div class="bd">
+        <div class="row3">
+          <div>
+            <label>Usuario</label>
+            <select id="s_user">
+              <option value="">(todos)</option>
+              <option value="Seba">Seba</option>
+              <option value="Borja">Borja</option>
+            </select>
+          </div>
+          <div>
+            <label>Deporte</label>
+            <select id="s_sport">
+              <option value="">(todos)</option>
+              <option value="Tenis">Tenis</option>
+              <option value="Padel">Pádel</option>
+            </select>
+          </div>
+          <div>
+            <label>Tipo</label>
+            <select id="s_type">
+              <option value="">(todos)</option>
+              <option value="Amistoso">Amistoso</option>
+              <option value="Campeonato">Campeonato</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row3" style="margin-top:10px">
+          <div>
+            <label>Modalidad</label>
+            <select id="s_mode"><option value="">(todas)</option></select>
+          </div>
+          <div>
+            <label>Categoría</label>
+            <select id="s_category"><option value="">(todas)</option></select>
+          </div>
+          <div>
+            <label>Resultado</label>
+            <select id="s_result">
+              <option value="">(todos)</option>
+              <option value="Ganado">Ganado</option>
+              <option value="Perdido">Perdido</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button class="ok" id="refreshStatsBtn">Actualizar estadísticas</button>
+          <button class="ghost" id="resetStatsFiltersBtn">Reset filtros</button>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kpi" id="kpiBox"></div>
+
+        <div class="hr"></div>
+
+        <div class="row">
+          <div>
+            <h3 style="margin:0 0 8px;font-size:14px">Win/Loss</h3>
+            <canvas id="wlChart"></canvas>
+            <p class="hint">Ganados vs perdidos según filtros.</p>
+          </div>
+          <div>
+            <h3 style="margin:0 0 8px;font-size:14px">Radar de promedios (1–7)</h3>
+            <canvas id="avgChart"></canvas>
+            <p class="hint">Radar con promedios por ítem (según filtros). Escala fija 1–7.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DATOS -->
+  <section id="data" class="tabPane" style="display:none;">
+    <div class="grid">
+      <div class="card">
+  <div class="hd"><h2>Exportar / Importar</h2></div>
+  <div class="bd">
+
+    <p class="hint">Respaldo completo en JSON.</p>
+
+    <div class="btns">
+      <button class="ok" id="exportBtn">Exportar JSON</button>
+      <button class="ghost" id="copyExportBtn">Copiar</button>
+      <button class="danger" id="wipeBtn">Borrar TODO</button>
+    </div>
+
+    <div class="hr"></div>
+
+    <label>JSON</label>
+    <textarea id="dataBox"
+      placeholder="Aquí aparecerá el JSON exportado, o pega aquí para importar...">
+    </textarea>
+
+    <div class="btns">
+      <button class="ok" id="importBtn">Importar JSON</button>
+    </div>
+
+    <!-- BOTONES SYNC -->
+    <div class="btns" style="margin-top:10px; gap:10px;">
+      <button class="ok" id="syncUpBtn">Sync ↑ Subir a Sheets</button>
+      <button class="ghost" id="syncDownBtn">Sync ↓ Bajar / Mezclar</button>
+    </div>
+
+    <p class="hint" style="margin-top:6px;">
+      Sync ↑ guarda tu base completa en Google Sheets.<br>
+      Sync ↓ baja desde Sheets y la mezcla con lo local.
+    </p>
+
+    <div class="hr"></div>
+
+    <p class="hint">
+      Guarda en tu navegador (localStorage). Exporta si cambias de PC.
+    </p>
+
+  </div>
+</div>
+
+
+      <div class="card">
+        <div class="hd"><h2>Checklist</h2></div>
+        <div class="bd">
+          <ul class="hint" style="margin:0;padding-left:18px">
+            <li>Registro de partidos con comentario ✅</li>
+            <li>Campos dinámicos ✅</li>
+            <li>Campeonatos con símbolo ✅</li>
+            <li>Planes tácticos ✅</li>
+            <li>Técnica por golpe ✅</li>
+            <li>Estadísticas + radar ✅</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===========================
+   Utilidades y datos base
+=========================== */
+const LS_KEY = "tp_app_v1";
+
+const ROUNDS_ORDER = ["Grupo","1R","R16","QF","SF","F"];
+const ROUND_TO_SYMBOL = {
+  "F": "F",
+  "SF": "SF",
+  "QF": "QF",
+  "R16": "R16",
+  "1R": "1R",
+  "Grupo": "1R"
+};
+
+const TENIS_CATS = {
+  "Borja": ["Roja","Naranja","Verde"],
+  "Seba": ["Primera","Segunda","Tercera"]
+};
+
+const PADEL_CATS = ["Primera","Segunda","Tercera","Cuarta","Quinta","Sexta"];
+
+const MODES = {
+  "Tenis": ["Singles","Dobles"],
+  "Padel": ["Varones","Mixto"]
+};
+
+const SHOTS = {
+  "Tenis": ["Primer saque","Segundo saque","Derecha","Revés","Slice","Volea derecha","Volea revés","Devolución servicio","Smash","Dejadas"],
+  "Padel": ["Saque","Volea de bloqueo","Volea de presión","Bandeja","Remate","Rulo-Gancho","Salida de pared","Resto","Defensa","Globo","Chiquita"]
+};
+
+// Sliders según combinación (1–7)
+function sliderKeys(user, sport){
+  if(sport === "Tenis" && user === "Borja"){
+    return [
+      "Saque","Derecha","Revés","Volea","Slice","Estrategia","Mentalidad","Estado físico"
+    ];
+  }
+  if(sport === "Tenis" && user === "Seba"){
+    return [
+      "Primer saque","Segundo saque","Derecha","Revés","Volea","Slice","Estrategia","Mentalidad","Estado físico"
+    ];
+  }
+  return [
+    "Comunicación con partner","Defensa","Globos","Voleas","Bandejas","Remates","Estrategia","Mentalidad","Estado físico"
+  ];
+}
+
+function uid(){
+  return Math.random().toString(16).slice(2) + Date.now().toString(16);
+}
+function fmtDate(iso){
+  if(!iso) return "—";
+  const [y,m,d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+function escapeHtml(str){
+  return (str||"").replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  setTimeout(()=> el.classList.remove("show"), 1800);
+}
+
+/* ===========================
+   Estado / persistencia
+=========================== */
+let state = loadState();
+
+function loadState(){
+  const raw = localStorage.getItem(LS_KEY);
+  if(!raw){
+    return { matches: [], tournaments: [], tactics: [], tech: [] };
+  }
+  try{
+    const parsed = JSON.parse(raw);
+    return {
+      matches: parsed.matches || [],
+      tournaments: parsed.tournaments || [],
+      tactics: parsed.tactics || [],
+      tech: parsed.tech || []
+    };
+  }catch{
+    return { matches: [], tournaments: [], tactics: [], tech: [] };
+  }
+}
+function saveState(){
+  localStorage.setItem(LS_KEY, JSON.stringify(state));
+}
+
+/* ===========================
+   Navegación
+=========================== */
+document.querySelectorAll(".tab").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = btn.dataset.tab;
+    document.querySelectorAll(".tabPane").forEach(p=>p.style.display="none");
+    document.getElementById(tab).style.display = "block";
+    if(tab === "stats") refreshStats();
+    if(tab === "tournaments") renderTournaments();
+  });
+});
+
+/* ===========================
+   PARTIDOS: form dinámico
+=========================== */
+const m_user = document.getElementById("m_user");
+const m_sport = document.getElementById("m_sport");
+const m_type = document.getElementById("m_type");
+const m_mode = document.getElementById("m_mode");
+const m_category = document.getElementById("m_category");
+const m_date = document.getElementById("m_date");
+const m_scoreTemplate = document.getElementById("m_scoreTemplate");
+const m_score = document.getElementById("m_score");
+const m_scoreFormat = document.getElementById("m_scoreFormat");
+const m_result = document.getElementById("m_result");
+
+const opp2Row = document.getElementById("opp2Row");
+const partnerRow = document.getElementById("partnerRow");
+
+const m_opp1 = document.getElementById("m_opp1");
+const m_opp1cat = document.getElementById("m_opp1cat");
+const m_opp2 = document.getElementById("m_opp2");
+const m_opp2cat = document.getElementById("m_opp2cat");
+const m_partner = document.getElementById("m_partner");
+const m_partnercat = document.getElementById("m_partnercat");
+
+const tournamentLinkBox = document.getElementById("tournamentLinkBox");
+const m_tournamentId = document.getElementById("m_tournamentId");
+const m_round = document.getElementById("m_round");
+const m_newTournamentName = document.getElementById("m_newTournamentName");
+const m_newTournamentDate = document.getElementById("m_newTournamentDate");
+
+const m_sliders = document.getElementById("m_sliders");
+const m_comment = document.getElementById("m_comment");
+
+const matchFormTitle = document.getElementById("matchFormTitle");
+const saveMatchBtn = document.getElementById("saveMatchBtn");
+const resetMatchBtn = document.getElementById("resetMatchBtn");
+const deleteMatchBtn = document.getElementById("deleteMatchBtn");
+
+let editingMatchId = null;
+
+function setTodayIfEmpty(input){
+  if(!input.value){
+    const d = new Date();
+    const iso = d.toISOString().slice(0,10);
+    input.value = iso;
+  }
+}
+
+function updateModes(){
+  const sport = m_sport.value;
+  m_mode.innerHTML = MODES[sport].map(v=>`<option value="${v}">${v}</option>`).join("");
+  updateOpponentPartnerUI();
+}
+function updateCategories(){
+  const user = m_user.value;
+  const sport = m_sport.value;
+
+  let cats = [];
+  if(sport === "Tenis") cats = TENIS_CATS[user] || [];
+  else cats = PADEL_CATS;
+
+  m_category.innerHTML = cats.map(c=>`<option value="${c}">${c}</option>`).join("");
+}
+function updateOpponentPartnerUI(){
+  const sport = m_sport.value;
+  const mode = m_mode.value;
+
+  const isPadel = sport === "Padel";
+  const isDobles = (sport === "Tenis" && mode === "Dobles");
+
+  const show2 = isPadel || isDobles;
+  opp2Row.style.display = show2 ? "grid" : "none";
+  partnerRow.style.display = show2 ? "grid" : "none";
+}
+function updateTournamentBox(){
+  const type = m_type.value;
+  if(type === "Campeonato"){
+    tournamentLinkBox.style.display = "block";
+    rebuildTournamentSelect();
+  }else{
+    tournamentLinkBox.style.display = "none";
+    m_tournamentId.value = "";
+  }
+}
+function rebuildTournamentSelect(){
+  const user = m_user.value;
+  const sport = m_sport.value;
+
+  const options = [];
+  options.push(`<option value="__new__">(Crear nuevo...)</option>`);
+  state.tournaments
+    .filter(t => t.user===user && t.sport===sport)
+    .sort((a,b)=> (b.date||"").localeCompare(a.date||""))
+    .forEach(t=>{
+      const meta = `${t.name} · ${fmtDate(t.date)} · ${t.mode} · ${t.category}`;
+      options.push(`<option value="${t.id}">${escapeHtml(meta)}</option>`);
+    });
+
+  m_tournamentId.innerHTML = options.join("");
+}
+function updateSliders(){
+  m_sliders.innerHTML = "";
+  const keys = sliderKeys(m_user.value, m_sport.value);
+  keys.forEach(k=>{
+    const wrap = document.createElement("div");
+    wrap.className = "slider";
+    wrap.innerHTML = `
+      <div class="sTop">
+        <b>${escapeHtml(k)}</b>
+        <span class="pill"><span class="muted">valor</span>&nbsp;<span data-val>4</span></span>
+      </div>
+      <input type="range" min="1" max="7" value="4" step="1" data-key="${escapeHtml(k)}" />
+    `;
+    const range = wrap.querySelector('input[type="range"]');
+    const valEl = wrap.querySelector('[data-val]');
+    range.addEventListener("input", ()=> valEl.textContent = range.value);
+    m_sliders.appendChild(wrap);
+  });
+}
+
+[m_user, m_sport, m_type, m_mode, m_category].forEach(el=>{
+  el.addEventListener("change", ()=>{
+    if(el === m_sport) updateModes();
+    updateCategories();
+    updateTournamentBox();
+    updateSliders();
+    rebuildFilterPickers();
+  });
+});
+
+m_scoreTemplate.addEventListener("change", ()=>{
+  const v = m_scoreTemplate.value;
+  if(!v) return;
+  const map = {
+    "TB7": {score:"7-5", fmt:"TB7"},
+    "TB10": {score:"10-8", fmt:"TB10"},
+    "SET6": {score:"6-4 7-6(5)", fmt:"Set6"},
+    "PADEL1SET6": {score:"6-3", fmt:"Padel1Set6"},
+    "PADEL1SET9": {score:"9-7", fmt:"Padel1Set9"},
+    "PADEL2SET_STB11": {score:"6-4 4-6 11-8", fmt:"Padel2Set+STB11"},
+    "3SETS": {score:"6-3 3-6 6-4", fmt:"3Sets"}
+  };
+  const picked = map[v];
+  if(picked){
+    if(!m_score.value) m_score.value = picked.score;
+    m_scoreFormat.value = picked.fmt;
+  }
+  m_scoreTemplate.value = "";
+});
+
+function getSliderValues(){
+  const out = {};
+  m_sliders.querySelectorAll('input[type="range"]').forEach(r=>{
+    out[r.dataset.key] = Number(r.value);
+  });
+  return out;
+}
+
+function resetMatchForm(){
+  editingMatchId = null;
+  matchFormTitle.textContent = "Nuevo partido";
+  deleteMatchBtn.style.display = "none";
+
+  m_user.value = "Seba";
+  m_sport.value = "Tenis";
+  updateModes();
+  updateCategories();
+  m_type.value = "Amistoso";
+  m_result.value = "Ganado";
+  setTodayIfEmpty(m_date);
+  m_score.value = "";
+  m_scoreFormat.value = "Libre";
+
+  m_opp1.value = "";
+  m_opp1cat.value = "";
+  m_opp2.value = "";
+  m_opp2cat.value = "";
+  m_partner.value = "";
+  m_partnercat.value = "";
+
+  m_comment.value = "";
+
+  m_round.value = "Grupo";
+  m_newTournamentName.value = "";
+  m_newTournamentDate.value = "";
+  updateTournamentBox();
+
+  updateSliders();
+}
+
+resetMatchBtn.addEventListener("click", ()=> resetMatchForm());
+
+deleteMatchBtn.addEventListener("click", ()=>{
+  if(!editingMatchId) return;
+  state.matches = state.matches.filter(m=>m.id !== editingMatchId);
+  saveState();
+  toast("Partido eliminado");
+  resetMatchForm();
+  renderMatches();
+  renderTournaments();
+});
+
+saveMatchBtn.addEventListener("click", ()=>{
+  const user = m_user.value;
+  const sport = m_sport.value;
+  const type = m_type.value;
+  const mode = m_mode.value;
+  const category = m_category.value;
+  const result = m_result.value;
+  const date = m_date.value || new Date().toISOString().slice(0,10);
+  const score = m_score.value.trim();
+  const scoreFormat = m_scoreFormat.value;
+
+  if(!m_opp1.value.trim()){
+    toast("Falta Rival 1");
+    return;
+  }
+
+  let tournamentId = null;
+  let round = null;
+  if(type === "Campeonato"){
+    const sel = m_tournamentId.value;
+    round = m_round.value;
+
+    if(sel === "__new__"){
+      const name = m_newTournamentName.value.trim();
+      const tdate = m_newTournamentDate.value || date;
+      if(!name){
+        toast("Falta nombre del campeonato");
+        return;
+      }
+      const newT = {
+        id: uid(),
+        user, sport,
+        mode, category,
+        name,
+        date: tdate
+      };
+      state.tournaments.push(newT);
+      tournamentId = newT.id;
+    }else{
+      tournamentId = sel || null;
+    }
+  }
+
+  const opp2Needed = (sport==="Padel") || (sport==="Tenis" && mode==="Dobles");
+  if(opp2Needed && !m_opp2.value.trim()){
+    toast("Falta Rival 2 (dobles/pádel)");
+    return;
+  }
+  if(opp2Needed && !m_partner.value.trim()){
+    toast("Falta Partner (dobles/pádel)");
+    return;
+  }
+
+ const payload = {
+  id: editingMatchId || uid(),
+  updatedAt: new Date().toISOString(),
+
+  user,
+  sport,
+  type,
+  mode,
+  category,
+  result,
+  date,
+  score,
+  scoreFormat,
+partner: m_partner.value.trim(),
+
+
+  opponents: [
+    { name: m_opp1.value.trim(), category: m_opp1cat.value.trim() },
+    ...(opp2Needed
+      ? [{ name: m_opp2.value.trim(), category: m_opp2cat.value.trim() }]
+      : [])
+  ]
+};
+
+
+  if(editingMatchId){
+    const idx = state.matches.findIndex(m=>m.id===editingMatchId);
+    if(idx>=0) state.matches[idx] = payload;
+    toast("Partido actualizado");
+  }else{
+    state.matches.push(payload);
+    toast("Partido guardado");
+  }
+
+  saveState();
+  resetMatchForm();
+  renderMatches();
+  renderTournaments();
+});
+
+/* ===========================
+   PARTIDOS: listado + filtros
+=========================== */
+const matchList = document.getElementById("matchList");
+const matchSearch = document.getElementById("matchSearch");
+document.getElementById("clearSearch").addEventListener("click", ()=>{
+  matchSearch.value = "";
+  renderMatches();
+});
+
+const f_user = document.getElementById("f_user");
+const f_sport = document.getElementById("f_sport");
+const f_type = document.getElementById("f_type");
+const f_mode = document.getElementById("f_mode");
+const f_category = document.getElementById("f_category");
+const f_result = document.getElementById("f_result");
+
+[f_user,f_sport,f_type,f_mode,f_category,f_result].forEach(el=> el.addEventListener("change", renderMatches));
+matchSearch.addEventListener("input", renderMatches);
+
+function rebuildFilterPickers(){
+  const modes = new Set([""]);
+  const cats = new Set([""]);
+
+  MODES["Tenis"].forEach(m=>modes.add(m));
+  MODES["Padel"].forEach(m=>modes.add(m));
+  Object.values(TENIS_CATS).flat().forEach(c=>cats.add(c));
+  PADEL_CATS.forEach(c=>cats.add(c));
+
+  state.matches.forEach(m=>{
+    modes.add(m.mode);
+    cats.add(m.category);
+  });
+
+  f_mode.innerHTML = [...modes].map(v=> v==="" ? `<option value="">(todas)</option>` : `<option value="${v}">${v}</option>`).join("");
+  f_category.innerHTML = [...cats].map(v=> v==="" ? `<option value="">(todas)</option>` : `<option value="${v}">${v}</option>`).join("");
+}
+
+function matchPassesFilters(m){
+  if(f_user.value && m.user !== f_user.value) return false;
+  if(f_sport.value && m.sport !== f_sport.value) return false;
+  if(f_type.value && m.type !== f_type.value) return false;
+  if(f_mode.value && m.mode !== f_mode.value) return false;
+  if(f_category.value && m.category !== f_category.value) return false;
+  if(f_result.value && m.result !== f_result.value) return false;
+
+  const q = matchSearch.value.trim().toLowerCase();
+  if(q){
+    const tName = m.tournamentId ? (state.tournaments.find(t=>t.id===m.tournamentId)?.name || "") : "";
+    const hay = [
+      m.user,m.sport,m.type,m.mode,m.category,m.result,m.score,m.scoreFormat,m.round||"",
+      m.comment||"",
+      tName,
+      ...(m.opponents||[]).map(o=>`${o.name} ${o.category}`),
+      m.partner ? `${m.partner.name} ${m.partner.category}` : ""
+    ].join(" ").toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+function tournamentSymbolForMatch(m){
+  if(m.type!=="Campeonato") return "";
+  if(!m.tournamentId) return "";
+  const sym = ROUND_TO_SYMBOL[m.round] || "";
+  return sym ? `· ${sym}` : "";
+}
+
+function averageSliders(sl){
+  const vals = Object.values(sl||{});
+  if(vals.length===0) return 0;
+  return vals.reduce((a,b)=>a+b,0)/vals.length;
+}
+
+function renderMatches(){
+  rebuildFilterPickers();
+
+  const filtered = state.matches
+    .slice()
+    .sort((a,b)=> (b.date||"").localeCompare(a.date||""))
+    .filter(matchPassesFilters);
+
+  matchList.innerHTML = "";
+  if(filtered.length === 0){
+    matchList.innerHTML = `<p class="hint">No hay partidos con estos filtros.</p>`;
+    return;
+  }
+
+  filtered.forEach(m=>{
+    const t = m.tournamentId ? state.tournaments.find(t=>t.id===m.tournamentId) : null;
+    const title = `${m.user} · ${m.sport} · ${m.mode} · ${m.category}`;
+    const resClass = m.result==="Ganado" ? "badgeWin" : "badgeLose";
+    const opp = m.opponents?.map(o=> `${escapeHtml(o.name)} <span class="muted">(${escapeHtml(o.category||"")})</span>`).join(" / ") || "—";
+    const partner = m.partner ? `${escapeHtml(m.partner.name)} <span class="muted">(${escapeHtml(m.partner.category||"")})</span>` : "—";
+    const sym = (m.type==="Campeonato" && t) ? ` · <span class="pill">${escapeHtml(t.name)} ${escapeHtml(tournamentSymbolForMatch(m).replace("· ",""))}</span>` : "";
+
+    const avg = averageSliders(m.sliders);
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
+      <div class="top">
+        <div>
+          <h3>${title} <span class="${resClass}">· ${m.result}</span></h3>
+          <div class="mini">
+            <span class="pill">${fmtDate(m.date)}</span>
+            <span class="pill">${escapeHtml(m.type)}</span>
+            <span class="pill">Score: <span class="muted">${escapeHtml(m.score || "—")}</span></span>
+            <span class="pill">Avg: <span class="muted">${avg.toFixed(2)}</span></span>
+            ${sym}
+          </div>
+        </div>
+        <div class="btns" style="margin:0">
+          <button class="smallBtn ghost" data-edit="${m.id}">Editar</button>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip">Rivales: ${opp}</span>
+        ${((m.sport==="Padel") || (m.sport==="Tenis" && m.mode==="Dobles")) ? `<span class="chip">Partner: ${partner}</span>` : ``}
+        ${m.type==="Campeonato" ? `<span class="chip">Ronda: ${escapeHtml(m.round || "—")}</span>` : ``}
+        <span class="chip">Formato: ${escapeHtml(m.scoreFormat||"Libre")}</span>
+      </div>
+      ${m.comment ? `<div class="hr"></div><div class="mini"><b>Comentario:</b> ${escapeHtml(m.comment)}</div>` : ``}
+    `;
+    item.querySelector('[data-edit]').addEventListener("click", ()=> loadMatchForEdit(m.id));
+    matchList.appendChild(item);
+  });
+}
+
+function loadMatchForEdit(id){
+  const m = state.matches.find(x=>x.id===id);
+  if(!m) return;
+  editingMatchId = id;
+  matchFormTitle.textContent = "Editar partido";
+  deleteMatchBtn.style.display = "inline-block";
+
+  m_user.value = m.user;
+  m_sport.value = m.sport;
+  updateModes();
+  m_mode.value = m.mode;
+  updateCategories();
+  m_category.value = m.category;
+  m_type.value = m.type;
+  m_result.value = m.result;
+  m_date.value = m.date || "";
+  m_score.value = m.score || "";
+  m_scoreFormat.value = m.scoreFormat || "Libre";
+
+  m_opp1.value = m.opponents?.[0]?.name || "";
+  m_opp1cat.value = m.opponents?.[0]?.category || "";
+  m_opp2.value = m.opponents?.[1]?.name || "";
+  m_opp2cat.value = m.opponents?.[1]?.category || "";
+  m_partner.value = m.partner?.name || "";
+  m_partnercat.value = m.partner?.category || "";
+
+  m_comment.value = m.comment || "";
+
+  updateOpponentPartnerUI();
+  updateTournamentBox();
+
+  if(m.type==="Campeonato"){
+    rebuildTournamentSelect();
+    m_tournamentId.value = m.tournamentId || "__new__";
+    m_round.value = m.round || "Grupo";
+  }
+
+  updateSliders();
+  m_sliders.querySelectorAll('input[type="range"]').forEach(r=>{
+    const k = r.dataset.key;
+    if(m.sliders && typeof m.sliders[k] === "number"){
+      r.value = m.sliders[k];
+      r.dispatchEvent(new Event("input"));
+    }
+  });
+
+  toast("Cargado para editar");
+}
+
+/* ===========================
+   CAMPEONATOS
+=========================== */
+const t_user = document.getElementById("t_user");
+const t_sport = document.getElementById("t_sport");
+const t_mode = document.getElementById("t_mode");
+const t_category = document.getElementById("t_category");
+const t_name = document.getElementById("t_name");
+const t_date = document.getElementById("t_date");
+const saveTournamentBtn = document.getElementById("saveTournamentBtn");
+const resetTournamentBtn = document.getElementById("resetTournamentBtn");
+const deleteTournamentBtn = document.getElementById("deleteTournamentBtn");
+const tFormTitle = document.getElementById("tFormTitle");
+const tournamentList = document.getElementById("tournamentList");
+const tSearch = document.getElementById("tSearch");
+document.getElementById("tClearSearch").addEventListener("click", ()=>{ tSearch.value=""; renderTournaments();});
+tSearch.addEventListener("input", renderTournaments);
+
+let editingTournamentId = null;
+
+function updateTournamentFormPickers(){
+  const sport = t_sport.value;
+  t_mode.innerHTML = MODES[sport].map(v=>`<option value="${v}">${v}</option>`).join("");
+  const user = t_user.value;
+  let cats = [];
+  if(sport==="Tenis") cats = TENIS_CATS[user] || [];
+  else cats = PADEL_CATS;
+  t_category.innerHTML = cats.map(c=>`<option value="${c}">${c}</option>`).join("");
+}
+[t_user,t_sport].forEach(el=> el.addEventListener("change", updateTournamentFormPickers));
+
+function resetTournamentForm(){
+  editingTournamentId = null;
+  tFormTitle.textContent = "Nuevo campeonato";
+  deleteTournamentBtn.style.display = "none";
+  t_user.value = "Seba";
+  t_sport.value = "Tenis";
+  updateTournamentFormPickers();
+  t_name.value = "";
+  setTodayIfEmpty(t_date);
+}
+resetTournamentBtn.addEventListener("click", resetTournamentForm);
+
+saveTournamentBtn.addEventListener("click", ()=>{
+const payload = {
+  id: editingTournamentId || uid(),
+  updatedAt: new Date().toISOString(),
+
+  user: t_user.value,
+  sport: t_sport.value,
+  mode: t_mode.value,
+  category: t_category.value,
+  name: t_name.value.trim(),
+  date: t_date.value || new Date().toISOString().slice(0,10)
+};
+
+  if(!payload.name){
+    toast("Falta nombre del campeonato");
+    return;
+  }
+  if(editingTournamentId){
+    const idx = state.tournaments.findIndex(t=>t.id===editingTournamentId);
+    if(idx>=0) state.tournaments[idx] = payload;
+    toast("Campeonato actualizado");
+  }else{
+    state.tournaments.push(payload);
+    toast("Campeonato guardado");
+  }
+  saveState();
+  resetTournamentForm();
+  renderTournaments();
+  rebuildTournamentSelect();
+});
+
+deleteTournamentBtn.addEventListener("click", ()=>{
+  if(!editingTournamentId) return;
+  state.matches = state.matches.map(m=> m.tournamentId===editingTournamentId ? {...m, tournamentId:null, round:null, type:"Amistoso"} : m);
+  state.tournaments = state.tournaments.filter(t=>t.id!==editingTournamentId);
+  saveState();
+  toast("Campeonato eliminado (partidos quedan como amistosos)");
+  resetTournamentForm();
+  renderTournaments();
+  renderMatches();
+});
+
+function computeTournamentOutcome(tournamentId){
+  const matches = state.matches.filter(m=> m.type==="Campeonato" && m.tournamentId===tournamentId);
+  if(matches.length===0) return {symbol:"—", best:"—", played:0, won:0, lost:0};
+  let won=0,lost=0;
+  matches.forEach(m=> m.result==="Ganado" ? won++ : lost++);
+
+  const hasFinalWin = matches.some(m=> m.round==="F" && m.result==="Ganado");
+  if(hasFinalWin) return {symbol:"🏆", best:"Campeón", played:matches.length, won, lost};
+
+  const hasFinalLoss = matches.some(m=> m.round==="F" && m.result==="Perdido");
+  if(hasFinalLoss) return {symbol:"F", best:"Finalista", played:matches.length, won, lost};
+
+  const hasSFLoss = matches.some(m=> m.round==="SF" && m.result==="Perdido");
+  if(hasSFLoss) return {symbol:"SF", best:"Semifinalista", played:matches.length, won, lost};
+
+  const hasQFLoss = matches.some(m=> m.round==="QF" && m.result==="Perdido");
+  if(hasQFLoss) return {symbol:"QF", best:"Cuartofinalista", played:matches.length, won, lost};
+
+  const hasR16Loss = matches.some(m=> m.round==="R16" && m.result==="Perdido");
+  if(hasR16Loss) return {symbol:"R16", best:"Octavofinalista", played:matches.length, won, lost};
+
+  const has1RLoss = matches.some(m=> (m.round==="1R" || m.round==="Grupo") && m.result==="Perdido");
+  if(has1RLoss) return {symbol:"1R", best:"1ra ronda / grupos", played:matches.length, won, lost};
+
+  const bestRoundIndex = Math.max(...matches.map(m=> ROUNDS_ORDER.indexOf(m.round||"Grupo")));
+  const bestRound = ROUNDS_ORDER[Math.max(0,bestRoundIndex)];
+  const sym = ROUND_TO_SYMBOL[bestRound] || "—";
+  return {symbol:sym, best:bestRound, played:matches.length, won, lost};
+}
+
+function renderTournaments(){
+  updateTournamentFormPickers();
+  rebuildTournamentSelect();
+
+  const q = tSearch.value.trim().toLowerCase();
+  const list = state.tournaments
+    .slice()
+    .sort((a,b)=> (b.date||"").localeCompare(a.date||""))
+    .filter(t=>{
+      if(!q) return true;
+      const hay = `${t.user} ${t.sport} ${t.mode} ${t.category} ${t.name} ${t.date}`.toLowerCase();
+      return hay.includes(q);
+    });
+
+  tournamentList.innerHTML = "";
+  if(list.length===0){
+    tournamentList.innerHTML = `<p class="hint">No hay campeonatos aún.</p>`;
+    return;
+  }
+
+  list.forEach(t=>{
+    const o = computeTournamentOutcome(t.id);
+    const item = document.createElement("div");
+    item.className = "item";
+    item.innerHTML = `
+      <div class="top">
+        <div>
+          <h3>${escapeHtml(t.name)} <span class="pill">${o.symbol}</span></h3>
+          <div class="mini">
+            <span class="pill">${escapeHtml(t.user)}</span>
+            <span class="pill">${escapeHtml(t.sport)}</span>
+            <span class="pill">${escapeHtml(t.mode)}</span>
+            <span class="pill">${escapeHtml(t.category)}</span>
+            <span class="pill">${fmtDate(t.date)}</span>
+          </div>
+        </div>
+        <div class="btns" style="margin:0">
+          <button class="smallBtn ghost" data-edit-t="${t.id}">Editar</button>
+        </div>
+      </div>
+      <div class="chips">
+        <span class="chip">Instancia: ${escapeHtml(o.best)}</span>
+        <span class="chip">Partidos: ${o.played} · G: ${o.won} · P: ${o.lost}</span>
+      </div>
+    `;
+    item.querySelector('[data-edit-t]').addEventListener("click", ()=> loadTournamentForEdit(t.id));
+    tournamentList.appendChild(item);
+  });
+}
+
+function loadTournamentForEdit(id){
+  const t = state.tournaments.find(x=>x.id===id);
+  if(!t) return;
+  editingTournamentId = id;
+  tFormTitle.textContent = "Editar campeonato";
+  deleteTournamentBtn.style.display = "inline-block";
+  t_user.value = t.user;
+  t_sport.value = t.sport;
+  updateTournamentFormPickers();
+  t_mode.value = t.mode;
+  t_category.value = t.category;
+  t_name.value = t.name;
+  t_date.value = t.date || "";
+  toast("Campeonato cargado");
+}
+
+/* ===========================
+   TÁCTICA
+=========================== */
+const ta_user = document.getElementById("ta_user");
+const ta_sport = document.getElementById("ta_sport");
+const ta_category = document.getElementById("ta_category");
+const ta_tags = document.getElementById("ta_tags");
+const ta_text = document.getElementById("ta_text");
+const ta_active = document.getElementById("ta_active");
+const saveTacticBtn = document.getElementById("saveTacticBtn");
+const resetTacticBtn = document.getElementById("resetTacticBtn");
+const deleteTacticBtn = document.getElementById("deleteTacticBtn");
+const taFormTitle = document.getElementById("taFormTitle");
+const tacticList = document.getElementById("tacticList");
+const taSearch = document.getElementById("taSearch");
+document.getElementById("taClearSearch").addEventListener("click", ()=>{ taSearch.value=""; renderTactics();});
+taSearch.addEventListener("input", renderTactics);
+
+let editingTacticId = null;
+
+function resetTacticForm(){
+  editingTacticId = null;
+  taFormTitle.textContent = "Nuevo plan táctico";
+  deleteTacticBtn.style.display = "none";
+  ta_user.value = "Seba";
+  ta_sport.value = "Tenis";
+  ta_category.value = "";
+  ta_tags.value = "";
+  ta_text.value = "";
+  ta_active.value = "No";
+}
+resetTacticBtn.addEventListener("click", resetTacticForm);
+
+saveTacticBtn.addEventListener("click", ()=>{
+  if(!ta_text.value.trim()){
+    toast("Falta el plan táctico");
+    return;
+  }
+ const payload = {
+  id: editingTacticId || uid(),
+  updatedAt: new Date().toISOString(),
+
+  user: ta_user.value,
+  sport: ta_sport.value,
+  category: ta_category.value.trim(),
+
+  tags: ta_tags.value.split(",").map(s => s.trim()).filter(Boolean),
+  text: ta_text.value.trim(),
+  active: ta_active.value
+};
+
+  if(editingTacticId){
+    const idx = state.tactics.findIndex(x=>x.id===editingTacticId);
+    if(idx>=0) state.tactics[idx]=payload;
+    toast("Plan actualizado");
+  }else{
+    state.tactics.push(payload);
+    toast("Plan guardado");
+  }
+  saveState();
+  resetTacticForm();
+  renderTactics();
+});
+
+deleteTacticBtn.addEventListener("click", ()=>{
+  if(!editingTacticId) return;
+  state.tactics = state.tactics.filter(x=>x.id!==editingTacticId);
+  saveState();
+  toast("Plan eliminado");
+  resetTacticForm();
+  renderTactics();
+});
+
+function renderTactics(){
+  const q = taSearch.value.trim().toLowerCase();
+  const list = state.tactics.slice().reverse().filter(t=>{
+    if(!q) return true;
+    const hay = `${t.user} ${t.sport} ${t.category||""} ${t.tags.join(" ")} ${t.text}`.toLowerCase();
+    return hay.includes(q);
+  });
+
+  tacticList.innerHTML = "";
+  if(list.length===0){
+    tacticList.innerHTML = `<p class="hint">No hay planes tácticos.</p>`;
+    return;
+  }
+  list.forEach(t=>{
+    const item = document.createElement("div");
+    item.className="item";
+    item.innerHTML = `
+      <div class="top">
+        <div>
+          <h3>${escapeHtml(t.user)} · ${escapeHtml(t.sport)} ${t.active==="Sí" ? `<span class="pill">Activo</span>` : ""}</h3>
+          <div class="mini">${t.category ? `<span class="pill">${escapeHtml(t.category)}</span>` : ""}</div>
+        </div>
+        <div class="btns" style="margin:0">
+          <button class="smallBtn ghost" data-edit-ta="${t.id}">Editar</button>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <div class="mini">${escapeHtml(t.text)}</div>
+      ${t.tags?.length ? `<div class="chips">${t.tags.map(x=>`<span class="chip">#${escapeHtml(x)}</span>`).join("")}</div>` : ``}
+    `;
+    item.querySelector('[data-edit-ta]').addEventListener("click", ()=> loadTacticForEdit(t.id));
+    tacticList.appendChild(item);
+  });
+}
+function loadTacticForEdit(id){
+  const t = state.tactics.find(x=>x.id===id);
+  if(!t) return;
+  editingTacticId = id;
+  taFormTitle.textContent = "Editar plan táctico";
+  deleteTacticBtn.style.display = "inline-block";
+  ta_user.value = t.user;
+  ta_sport.value = t.sport;
+  ta_category.value = t.category || "";
+  ta_tags.value = (t.tags||[]).join(", ");
+  ta_text.value = t.text || "";
+  ta_active.value = t.active || "No";
+  toast("Plan táctico cargado");
+}
+
+/* ===========================
+   TÉCNICA
+=========================== */
+const te_user = document.getElementById("te_user");
+const te_sport = document.getElementById("te_sport");
+const te_shot = document.getElementById("te_shot");
+const te_link = document.getElementById("te_link");
+const te_key = document.getElementById("te_key");
+const te_error = document.getElementById("te_error");
+const te_cue = document.getElementById("te_cue");
+const saveTechBtn = document.getElementById("saveTechBtn");
+const resetTechBtn = document.getElementById("resetTechBtn");
+const deleteTechBtn = document.getElementById("deleteTechBtn");
+const teFormTitle = document.getElementById("teFormTitle");
+const techList = document.getElementById("techList");
+const teSearch = document.getElementById("teSearch");
+document.getElementById("teClearSearch").addEventListener("click", ()=>{ teSearch.value=""; renderTech();});
+teSearch.addEventListener("input", renderTech);
+
+const teFilterSport = document.getElementById("teFilterSport");
+const teFilterUser = document.getElementById("teFilterUser");
+const teFilterShot = document.getElementById("teFilterShot");
+[teFilterSport, teFilterUser, teFilterShot].forEach(el=> el.addEventListener("change", renderTech));
+
+let editingTechId = null;
+
+function updateShotPicker(){
+  const sport = te_sport.value;
+  te_shot.innerHTML = SHOTS[sport].map(s=>`<option value="${s}">${s}</option>`).join("");
+
+  const all = new Set([""]);
+  Object.values(SHOTS).flat().forEach(s=>all.add(s));
+  teFilterShot.innerHTML = [...all].map(v=> v==="" ? `<option value="">(todos)</option>` : `<option value="${v}">${v}</option>`).join("");
+}
+te_sport.addEventListener("change", updateShotPicker);
+
+function resetTechForm(){
+  editingTechId = null;
+  teFormTitle.textContent = "Nuevo detalle técnico";
+  deleteTechBtn.style.display = "none";
+  te_user.value = "Seba";
+  te_sport.value = "Tenis";
+  updateShotPicker();
+  te_shot.value = SHOTS["Tenis"][0];
+  te_link.value = "";
+  te_key.value = "";
+  te_error.value = "";
+  te_cue.value = "";
+}
+resetTechBtn.addEventListener("click", resetTechForm);
+
+saveTechBtn.addEventListener("click", ()=>{
+  if(!te_key.value.trim() && !te_error.value.trim() && !te_cue.value.trim()){
+    toast("Agrega al menos una nota (clave/error/cue)");
+    return;
+  }
+  const payload = {
+  id: editingTechId || uid(),
+  updatedAt: new Date().toISOString(),
+
+  user: te_user.value,
+  sport: te_sport.value,
+  shot: te_shot.value,
+  link: te_link.value.trim(),
+  key: te_key.value.trim(),
+  error: te_error.value.trim(),
+  cue: te_cue.value.trim()
+};
+
+  if(editingTechId){
+    const idx = state.tech.findIndex(x=>x.id===editingTechId);
+    if(idx>=0) state.tech[idx]=payload;
+    toast("Técnica actualizada");
+  }else{
+    state.tech.push(payload);
+    toast("Técnica guardada");
+  }
+  saveState();
+  resetTechForm();
+  renderTech();
+});
+
+deleteTechBtn.addEventListener("click", ()=>{
+  if(!editingTechId) return;
+  state.tech = state.tech.filter(x=>x.id!==editingTechId);
+  saveState();
+  toast("Técnica eliminada");
+  resetTechForm();
+  renderTech();
+});
+
+function techPassesFilters(t){
+  if(teFilterSport.value && t.sport!==teFilterSport.value) return false;
+  if(teFilterUser.value && t.user!==teFilterUser.value) return false;
+  if(teFilterShot.value && t.shot!==teFilterShot.value) return false;
+  const q = teSearch.value.trim().toLowerCase();
+  if(q){
+    const hay = `${t.user} ${t.sport} ${t.shot} ${t.cue||""} ${t.key||""} ${t.error||""}`.toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+function renderTech(){
+  updateShotPicker();
+
+  const list = state.tech.slice().reverse().filter(techPassesFilters);
+  techList.innerHTML="";
+  if(list.length===0){
+    techList.innerHTML = `<p class="hint">No hay detalles técnicos.</p>`;
+    return;
+  }
+  list.forEach(t=>{
+    const item = document.createElement("div");
+    item.className="item";
+    item.innerHTML = `
+      <div class="top">
+        <div>
+          <h3>${escapeHtml(t.user)} · ${escapeHtml(t.sport)} · ${escapeHtml(t.shot)}</h3>
+          <div class="mini">${t.cue ? `<span class="pill">Cue: <span class="muted">${escapeHtml(t.cue)}</span></span>` : ""}</div>
+        </div>
+        <div class="btns" style="margin:0">
+          <button class="smallBtn ghost" data-edit-te="${t.id}">Editar</button>
+        </div>
+      </div>
+      <div class="chips">
+        ${t.link ? `<span class="chip">Video: <a href="${escapeHtml(t.link)}" target="_blank" rel="noreferrer" style="color:var(--accent);font-weight:900">abrir</a></span>` : ``}
+      </div>
+      <div class="hr"></div>
+      ${t.key ? `<div class="mini"><b>Clave:</b> ${escapeHtml(t.key)}</div>` : ``}
+      ${t.error ? `<div class="mini" style="margin-top:6px"><b>Error típico:</b> ${escapeHtml(t.error)}</div>` : ``}
+    `;
+    item.querySelector('[data-edit-te]').addEventListener("click", ()=> loadTechForEdit(t.id));
+    techList.appendChild(item);
+  });
+}
+function loadTechForEdit(id){
+  const t = state.tech.find(x=>x.id===id);
+  if(!t) return;
+  editingTechId = id;
+  teFormTitle.textContent = "Editar detalle técnico";
+  deleteTechBtn.style.display = "inline-block";
+  te_user.value = t.user;
+  te_sport.value = t.sport;
+  updateShotPicker();
+  te_shot.value = t.shot;
+  te_link.value = t.link || "";
+  te_key.value = t.key || "";
+  te_error.value = t.error || "";
+  te_cue.value = t.cue || "";
+  toast("Detalle técnico cargado");
+}
+
+/* ===========================
+   ESTADÍSTICAS
+=========================== */
+const s_user = document.getElementById("s_user");
+const s_sport = document.getElementById("s_sport");
+const s_type = document.getElementById("s_type");
+const s_mode = document.getElementById("s_mode");
+const s_category = document.getElementById("s_category");
+const s_result = document.getElementById("s_result");
+
+document.getElementById("refreshStatsBtn").addEventListener("click", refreshStats);
+document.getElementById("resetStatsFiltersBtn").addEventListener("click", ()=>{
+  s_user.value=""; s_sport.value=""; s_type.value=""; s_mode.value=""; s_category.value=""; s_result.value="";
+  refreshStats();
+});
+
+function rebuildStatsPickers(){
+  const modes = new Set([""]);
+  const cats = new Set([""]);
+  MODES["Tenis"].forEach(m=>modes.add(m));
+  MODES["Padel"].forEach(m=>modes.add(m));
+  Object.values(TENIS_CATS).flat().forEach(c=>cats.add(c));
+  PADEL_CATS.forEach(c=>cats.add(c));
+  state.matches.forEach(m=>{ modes.add(m.mode); cats.add(m.category); });
+
+  s_mode.innerHTML = [...modes].map(v=> v==="" ? `<option value="">(todas)</option>` : `<option value="${v}">${v}</option>`).join("");
+  s_category.innerHTML = [...cats].map(v=> v==="" ? `<option value="">(todas)</option>` : `<option value="${v}">${v}</option>`).join("");
+}
+
+function matchPassesStatsFilters(m){
+  if(s_user.value && m.user!==s_user.value) return false;
+  if(s_sport.value && m.sport!==s_sport.value) return false;
+  if(s_type.value && m.type!==s_type.value) return false;
+  if(s_mode.value && m.mode!==s_mode.value) return false;
+  if(s_category.value && m.category!==s_category.value) return false;
+  if(s_result.value && m.result!==s_result.value) return false;
+  return true;
+}
+
+function groupCount(arr, fn){
+  const out = {};
+  arr.forEach(x=>{
+    const k = fn(x) || "—";
+    out[k] = (out[k]||0)+1;
+  });
+  return out;
+}
+
+function mergeSliderAverages(matches){
+  const sum = {};
+  const cnt = {};
+  matches.forEach(m=>{
+    const sl = m.sliders || {};
+    Object.keys(sl).forEach(k=>{
+      sum[k] = (sum[k]||0) + Number(sl[k]);
+      cnt[k] = (cnt[k]||0) + 1;
+    });
+  });
+  const avg = {};
+  Object.keys(sum).forEach(k=> avg[k]= sum[k]/cnt[k]);
+  return avg;
+}
+
+function renderKpis(matches){
+  const kpi = document.getElementById("kpiBox");
+  const total = matches.length;
+  const w = matches.filter(m=>m.result==="Ganado").length;
+  const l = matches.filter(m=>m.result==="Perdido").length;
+  const winRate = total ? (w/total*100) : 0;
+  const avgAll = total ? (matches.reduce((a,m)=>a+averageSliders(m.sliders),0)/total) : 0;
+
+  const byType = groupCount(matches, m=>m.type);
+  const bySport = groupCount(matches, m=>m.sport);
+
+  kpi.innerHTML = `
+    <div class="box"><b>${total}</b><span>Partidos (filtros)</span></div>
+    <div class="box"><b>${w} / ${l}</b><span>Ganados / Perdidos</span></div>
+    <div class="box"><b>${winRate.toFixed(1)}%</b><span>Win rate</span></div>
+    <div class="box"><b>${avgAll.toFixed(2)}</b><span>Promedio global (1–7)</span></div>
+    <div class="box"><b>${(byType["Campeonato"]||0)}</b><span>Campeonatos</span></div>
+    <div class="box"><b>${(byType["Amistoso"]||0)}</b><span>Amistosos</span></div>
+    <div class="box"><b>${(bySport["Tenis"]||0)}</b><span>Tenis</span></div>
+    <div class="box"><b>${(bySport["Padel"]||0)}</b><span>Pádel</span></div>
+  `;
+}
+
+/* ====== Chart helpers ====== */
+function drawBarChart(canvas, labels, values){
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width = canvas.clientWidth * devicePixelRatio;
+  const H = canvas.height = canvas.clientHeight * devicePixelRatio;
+
+  ctx.clearRect(0,0,W,H);
+
+  const pad = 24 * devicePixelRatio;
+  const left = pad, right = pad, top = pad, bottom = pad + 18*devicePixelRatio;
+  const innerW = W - left - right;
+  const innerH = H - top - bottom;
+
+  ctx.strokeStyle = "rgba(34,48,72,.9)";
+  ctx.lineWidth = 2*devicePixelRatio;
+  ctx.beginPath();
+  ctx.moveTo(left, top);
+  ctx.lineTo(left, top+innerH);
+  ctx.lineTo(left+innerW, top+innerH);
+  ctx.stroke();
+
+  const maxV = Math.max(1, ...values);
+  const n = values.length;
+  const gap = 10*devicePixelRatio;
+  const barW = (innerW - gap*(n+1))/n;
+
+  ctx.font = `${12*devicePixelRatio}px ${getComputedStyle(document.body).fontFamily}`;
+
+  for(let i=0;i<n;i++){
+    const v = values[i];
+    const h = (v/maxV)* (innerH - 10*devicePixelRatio);
+    const x = left + gap + i*(barW+gap);
+    const y = top + innerH - h;
+
+    ctx.fillStyle = "rgba(231,238,252,.22)";
+    ctx.fillRect(x,y,barW,h);
+
+    ctx.fillStyle = "rgba(231,238,252,.92)";
+    ctx.fillText(String(v), x, y - 6*devicePixelRatio);
+
+    ctx.fillStyle = "rgba(159,176,204,.95)";
+    ctx.fillText(labels[i], x, top + innerH + 14*devicePixelRatio);
+  }
+}
+
+/* ====== Radar chart (1–7) ====== */
+function drawRadarChart(canvas, labels, values, min=1, max=7){
+  const ctx = canvas.getContext("2d");
+  const W = canvas.width = canvas.clientWidth * devicePixelRatio;
+  const H = canvas.height = canvas.clientHeight * devicePixelRatio;
+
+  ctx.clearRect(0,0,W,H);
+
+  const cx = W/2, cy = H/2;
+  const pad = 34 * devicePixelRatio;
+  const R = Math.min(W,H)/2 - pad;
+
+  const n = Math.max(3, labels.length);
+  const angle0 = -Math.PI/2;
+
+  // background rings (sin colores fijos, solo alpha)
+  const rings = 6; // de 1 a 7 aprox
+  ctx.strokeStyle = "rgba(34,48,72,.75)";
+  ctx.lineWidth = 1.5*devicePixelRatio;
+
+  for(let r=1; r<=rings; r++){
+    const rr = (r/rings)*R;
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const a = angle0 + i*(2*Math.PI/n);
+      const x = cx + rr*Math.cos(a);
+      const y = cy + rr*Math.sin(a);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+  }
+
+  // axes
+  ctx.strokeStyle = "rgba(34,48,72,.9)";
+  ctx.lineWidth = 1.5*devicePixelRatio;
+  for(let i=0;i<n;i++){
+    const a = angle0 + i*(2*Math.PI/n);
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(cx + R*Math.cos(a), cy + R*Math.sin(a));
+    ctx.stroke();
+  }
+
+  // labels (recortadas)
+  ctx.font = `${11*devicePixelRatio}px ${getComputedStyle(document.body).fontFamily}`;
+  ctx.fillStyle = "rgba(159,176,204,.95)";
+  labels.forEach((lab, i)=>{
+    const a = angle0 + i*(2*Math.PI/n);
+    const x = cx + (R + 14*devicePixelRatio)*Math.cos(a);
+    const y = cy + (R + 14*devicePixelRatio)*Math.sin(a);
+    const txt = (lab.length>16) ? lab.slice(0,16)+"…" : lab;
+    // pequeña corrección de alineación
+    const align = Math.cos(a);
+    ctx.textAlign = align > 0.3 ? "left" : (align < -0.3 ? "right" : "center");
+    ctx.textBaseline = Math.sin(a) > 0.3 ? "top" : (Math.sin(a) < -0.3 ? "bottom" : "middle");
+    ctx.fillText(txt, x, y);
+  });
+
+  // polygon
+  const norm = (v)=> {
+    const clamped = Math.max(min, Math.min(max, v));
+    return (clamped - min) / (max - min); // 0..1
+  };
+
+  ctx.beginPath();
+  for(let i=0;i<n;i++){
+    const a = angle0 + i*(2*Math.PI/n);
+    const v = values[i] ?? min;
+    const rr = norm(v) * R;
+    const x = cx + rr*Math.cos(a);
+    const y = cy + rr*Math.sin(a);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+
+  ctx.fillStyle = "rgba(231,238,252,.14)";
+  ctx.fill();
+  ctx.strokeStyle = "rgba(231,238,252,.55)";
+  ctx.lineWidth = 2.2*devicePixelRatio;
+  ctx.stroke();
+
+  // points + value text
+  ctx.fillStyle = "rgba(231,238,252,.9)";
+  for(let i=0;i<n;i++){
+    const a = angle0 + i*(2*Math.PI/n);
+    const v = values[i] ?? min;
+    const rr = norm(v) * R;
+    const x = cx + rr*Math.cos(a);
+    const y = cy + rr*Math.sin(a);
+    ctx.beginPath();
+    ctx.arc(x,y, 3.2*devicePixelRatio, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // scale hint
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillStyle = "rgba(159,176,204,.95)";
+  ctx.font = `${12*devicePixelRatio}px ${getComputedStyle(document.body).fontFamily}`;
+  ctx.fillText(`Escala ${min}–${max}`, 16*devicePixelRatio, 16*devicePixelRatio);
+}
+
+function refreshStats(){
+  rebuildStatsPickers();
+  const filtered = state.matches.filter(matchPassesStatsFilters);
+  renderKpis(filtered);
+
+  // Win/Loss
+  const w = filtered.filter(m=>m.result==="Ganado").length;
+  const l = filtered.filter(m=>m.result==="Perdido").length;
+  drawBarChart(document.getElementById("wlChart"), ["Ganados","Perdidos"], [w,l]);
+
+  // Radar averages
+  const avgBy = mergeSliderAverages(filtered);
+  let labels = Object.keys(avgBy);
+  let values = labels.map(k=> Number(avgBy[k].toFixed(2)));
+
+  // si no hay data
+  if(labels.length===0){
+    drawRadarChart(document.getElementById("avgChart"), ["—","—","—"], [1,1,1], 1, 7);
+    return;
+  }
+
+  // si hay demasiados (no debería), limitamos a 12 con los más bajos (para detectar debilidades)
+  if(labels.length > 12){
+    const pairs = labels.map((lab,i)=>({lab, val: values[i]}))
+      .sort((a,b)=> a.val - b.val)
+      .slice(0,12);
+    labels = pairs.map(p=>p.lab);
+    values = pairs.map(p=>p.val);
+  }
+
+  drawRadarChart(document.getElementById("avgChart"), labels, values, 1, 7);
+}
+
+/* ===========================
+   DATOS: export/import
+=========================== */
+const dataBox = document.getElementById("dataBox");
+document.getElementById("exportBtn").addEventListener("click", ()=>{
+  dataBox.value = JSON.stringify(state, null, 2);
+  toast("JSON exportado");
+});
+document.getElementById("copyExportBtn").addEventListener("click", async ()=>{
+  try{
+    await navigator.clipboard.writeText(dataBox.value || JSON.stringify(state));
+    toast("Copiado");
+  }catch{
+    toast("No se pudo copiar");
+  }
+});
+document.getElementById("importBtn").addEventListener("click", ()=>{
+  try{
+    const parsed = JSON.parse(dataBox.value);
+    if(!parsed) throw new Error("vacío");
+    state = {
+      matches: parsed.matches || [],
+      tournaments: parsed.tournaments || [],
+      tactics: parsed.tactics || [],
+      tech: parsed.tech || []
+    };
+    saveState();
+    toast("Importado");
+    renderMatches();
+    renderTournaments();
+    renderTactics();
+    renderTech();
+    refreshStats();
+  }catch{
+    toast("JSON inválido");
+  }
+});
+document.getElementById("wipeBtn").addEventListener("click", ()=>{
+  const ok = confirm("¿Borrar TODO? Esto no se puede deshacer.");
+  if(!ok) return;
+  state = { matches: [], tournaments: [], tactics: [], tech: [] };
+  saveState();
+  toast("Todo borrado");
+  renderMatches(); renderTournaments(); renderTactics(); renderTech(); refreshStats();
+});
+
+/* ===========================
+   Inicialización
+=========================== */
+function init(){
+  setTodayIfEmpty(m_date);
+  setTodayIfEmpty(t_date);
+
+  updateModes();
+  updateCategories();
+  updateTournamentBox();
+  updateSliders();
+  updateTournamentFormPickers();
+  updateShotPicker();
+
+  rebuildFilterPickers();
+  rebuildStatsPickers();
+  renderMatches();
+  renderTournaments();
+  renderTactics();
+  renderTech();
+  refreshStats();
+}
+// ======= SYNC GOOGLE SHEETS =======
+const SYNC = {
+  url: "https://script.google.com/macros/s/AKfycbzYP5RHLNiD7AHLWy0WaGXldi9pXwDCBMPKQNi24rmd1E_YzEMNAfC7H2sra4gThVCk/exec",
+  token: "sebaborjatenispadelregistros"
+};
+async function apiPost(action, payload=null){
+  const res = await fetch(SYNC.url, {
+    method: "POST",
+    headers: { "Content-Type":"text/plain;charset=utf-8" },
+    body: JSON.stringify({ action, token: SYNC.token, payload })
+  });
+  const data = await res.json();
+  if(!data.ok) throw new Error(data.error || "Error API");
+  return data;
+}
+
+// Merge por id: une sin duplicar (si hay choque, gana el más "nuevo")
+function mergeById(localArr, remoteArr){
+  const map = new Map();
+  [...localArr, ...remoteArr].forEach(item=>{
+    if(!item || !item.id) return;
+    const prev = map.get(item.id);
+    if(!prev) return map.set(item.id, item);
+
+    const a = prev.updatedAt || prev.date || "";
+    const b = item.updatedAt || item.date || "";
+    map.set(item.id, (String(b) > String(a)) ? item : prev);
+  });
+  return [...map.values()];
+}
+
+function ensureUpdatedAtEverywhere(){
+  const parts = ["matches","tournaments","tactics","tech"];
+  const now = new Date().toISOString();
+  parts.forEach(p=>{
+    (state[p]||[]).forEach(x=>{
+      if(!x.updatedAt) x.updatedAt = now;
+    });
+  });
+}
+
+async function syncUploadAll(){
+  ensureUpdatedAtEverywhere();
+  await apiPost("saveAll", state);
+  toast("Sync: subido a Sheets ✅");
+}
+
+async function syncDownloadAndMerge(){
+  const remote = (await apiPost("loadAll")).data;
+
+  state.matches = mergeById(state.matches || [], remote.matches || []);
+  state.tournaments = mergeById(state.tournaments || [], remote.tournaments || []);
+  state.tactics = mergeById(state.tactics || [], remote.tactics || []);
+  state.tech = mergeById(state.tech || [], remote.tech || []);
+
+  saveState();
+  renderMatches(); renderTournaments(); renderTactics(); renderTech(); refreshStats();
+  toast("Sync: descargado + mezclado ✅");
+}
+
+init();
+</script>
+</body>
+</html>
