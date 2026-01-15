@@ -1236,7 +1236,9 @@ saveMatchBtn.addEventListener("click", ()=>{
     return;
   }
 
- const payload = {
+ const opp2Needed = (sport==="Padel") || (sport==="Tenis" && mode==="Dobles");
+
+const payload = {
   id: editingMatchId || uid(),
   updatedAt: new Date().toISOString(),
 
@@ -1249,16 +1251,25 @@ saveMatchBtn.addEventListener("click", ()=>{
   date,
   score,
   scoreFormat,
-partner: m_partner.value.trim(),
 
+  tournamentId: tournamentId || null,
+  round: round || null,
 
   opponents: [
     { name: m_opp1.value.trim(), category: m_opp1cat.value.trim() },
     ...(opp2Needed
       ? [{ name: m_opp2.value.trim(), category: m_opp2cat.value.trim() }]
       : [])
-  ]
+  ],
+
+  partner: opp2Needed
+    ? { name: m_partner.value.trim(), category: m_partnercat.value.trim() }
+    : null,
+
+  sliders: getSliderValues(),
+  comment: m_comment.value.trim()
 };
+
 
 
   if(editingMatchId){
@@ -2309,3 +2320,4 @@ init();
 </body>
 
 </html>
+
